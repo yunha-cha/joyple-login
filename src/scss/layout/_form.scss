@@ -1,0 +1,151 @@
+@use '../helpers/' as *;
+.formStyle{
+	&.mt80{
+		margin-top: remSet(80px);
+		@include mobile(){
+			margin-top: 0;
+		}
+	}
+}
+.form {
+    &-wrap{
+        margin-bottom: remSet(150px);
+		@include tablet(){
+			margin-bottom: remSet(34px);
+		}
+    }
+    &-row{
+		margin-bottom: remSet(10px);
+    }
+	&-group {
+		position: relative;
+		width: 100%;
+		min-height: remSet(50px);
+		.dark &{
+			background: var(--color-darkGrays);
+		}
+		.light &{            
+			background: var(--color-grays);
+		}
+	}
+
+	&-label {
+		position: absolute;
+		font-family: inherit;
+		font-size: 1rem;
+		font-weight: 400;
+		line-height: inherit;
+		left: remSet(8px);
+		top: remSet(16px);
+		padding: 0 0.25rem;
+		color: var(--color-light);
+		transition: all 0.3s ease;
+		.dark &{
+			background: var(--color-darkGrays);
+		}
+		.light &{            
+			background: var(--color-grays);
+		}
+	}
+
+	&-input {
+		position: absolute;
+		font-family: inherit;
+		font-size: 1rem;
+		font-weight: 400;
+		line-height: inherit;
+		top: 0;
+		left: 0;
+		z-index: 1;
+		resize: none;
+		width: 100%;
+		height: auto;
+		min-height: remSet(50px);
+        padding:0 remSet(25px) 0 remSet(10px);
+		border-radius: remSet(4px);
+		
+		background: transparent;
+		transition: all 0.2s ease-in-out;
+
+		.dark &{
+			border: 1px solid var(--color-darkGrays);
+			border-bottom: 2px solid var(--color-blues);
+			color: var(--color-white);
+		}
+		.light &{            
+			border: 1px solid var(--color-grays);
+			border-bottom: 2px solid var(--color-blues);
+			color: var(--color-black);
+		}
+
+		&::placeholder {
+			opacity: 0;
+			visibility: hidden;
+			color: transparent;
+		}
+
+		&:focus {
+			outline: none;
+			border: 2px solid var(--color-blues);
+            padding-top: remSet(18px);
+			& ~ .form-label {
+				top: remSet(9px);
+				z-index: 5;
+				font-size: remSet(12px);
+				font-weight: 500;
+				color: var(--color-blues);
+				transition: all 0.2s ease-in-out;
+			}
+		}
+
+		&:not(:placeholder-shown).form-input {
+			&:not(:focus) {
+                outline: none;
+                border: 2px solid var(--color-blues);
+                padding-top: remSet(18px);
+				& ~ .form-label {
+                    top: remSet(9px);
+                    z-index: 5;
+                    font-size: remSet(12px);
+                    font-weight: 500;
+                    color: var(--color-blues);
+                    transition: all 0.2s ease-in-out;
+				}
+			}
+		}
+	}
+}
+.toggle-password{
+    position: absolute;
+    top: remSet(19px);
+    right: remSet(10px);
+    z-index: 10;
+}
+
+.error-message{
+    position: relative;
+    top: remSet(4px);
+    display: flex;
+    justify-content: flex-start;
+    font-size: remSet(12px);
+    color: var(--color-orange);
+}
+
+input[type="password"] {
+	appearance: none;            /* 일부 브라우저 기본 UI 제거 */
+	-webkit-text-security: disc; /* iOS 사파리 대응 (optional) */
+  }
+  
+  /* Edge, IE 눈 아이콘 제거 */
+  input[type="password"]::-ms-reveal {
+	display: none;
+  }
+  
+  /* Chrome, Samsung Internet 일부 대응 */
+  input::-webkit-credentials-auto-fill-button {
+	visibility: hidden;
+	display: none !important;
+	pointer-events: none;
+	position: absolute;
+	right: 0;
+  }

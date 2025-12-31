@@ -1,0 +1,89 @@
+@use '../helpers/' as *;
+
+html {
+    font-size: 16px;
+
+    // /* 스크롤바 전체 */
+    // ::-webkit-scrollbar {
+    //   width: 8px;
+    //   background-color: #f9f2dd;
+    // }
+
+    // /* 스크롤바 thumb */
+    // ::-webkit-scrollbar-thumb {
+    //   background-color: #532709;
+    //   border-radius: 6px;
+    // }
+
+    // /* 스크롤바 thumb에 호버 효과 적용 */
+    // ::-webkit-scrollbar-thumb:hover {
+    //   background-color: #3a1b06;
+    // }
+
+}
+
+.main {
+    width: 100%;
+    height: auto;
+}
+:root {
+    --app-height: 100%;
+}
+
+br {
+    &.m-line-break {
+        display: none;
+
+        @include mobile() {
+            display: block;
+        }
+    }
+}
+
+html,
+body {
+    width: 100%;
+    height: var(--app-height);
+    scroll-behavior: smooth;
+    word-break: keep-all;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF-Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+   
+    @include mobile {
+        min-height: 100vh;
+    }
+    @media screen and (max-width: 1280px) and (orientation: landscape) {
+        height: 100vh;
+    }
+    &.dark{
+        background: #373737;
+    }
+    &.light{            
+        background: #fff;
+    }
+}
+
+body {
+    &.-noneScroll {
+        min-height: 100vh;
+        overflow: hidden;
+        touch-action: none;
+    }
+}
+
+.pc {
+    @include mobile {
+        display: none !important;
+    }
+}
+
+.mo {
+    display: none !important;
+
+    @include mobile {
+        display: flex !important;
+    }
+}
+
+.arab {
+    text-align: right;
+}
