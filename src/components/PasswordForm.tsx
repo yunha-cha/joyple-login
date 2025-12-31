@@ -27,8 +27,8 @@ const PasswordForm = ({isDarkMode, inputPassword, passwordError, isPasswordValid
                         onChange={handlePassword}
                         onBlur={handleBlur}
                         style={{
-                        ...inputCss,
-                        borderColor: setInputColor(isPasswordValid)
+                            ...inputCss,
+                            borderColor: setInputColor(isPasswordValid)
                         }}
                         placeholder=""
                         required />

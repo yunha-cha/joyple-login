@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import PasswordForm from '../components/PasswordForm';
 
-const Login = () => {
+type LoginProps = {
+  isDarkMode :boolean;
+}
 
-    // 임시 [라이트]/다크 모드 - app.tsx나 layout.tsx에서 전역으로 프롭스
-  const isDarkMode :boolean = true;
+const Login = ({isDarkMode} :LoginProps) => {
+
   const userEmail :string | null = localStorage.getItem('userEmail');
 
   const [inputPassword, setInputPassword] = useState("");

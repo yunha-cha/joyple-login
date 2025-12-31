@@ -3,10 +3,14 @@ import { useNavigate } from 'react-router';
 import { ROUTES } from '../constants/route';
 import PasswordForm from '../components/PasswordForm';
 
-const Signup = () => {
+type SignUpProps = {
+  isDarkMode :boolean;
+}
+
+const Signup = ({isDarkMode} :SignUpProps) => {
 
   // 임시 [라이트]/다크 모드
-  const isDarkMode :boolean = false;
+  // const isDarkMode :boolean = false;
   const userEmail :string | null = localStorage.getItem('userEmail');
   const navigate = useNavigate();
 
@@ -83,12 +87,12 @@ const Signup = () => {
       <div className="formStyle">
         <form name="contact" className="contact-inform form">
           <PasswordForm
-                isDarkMode={isDarkMode}
-                inputPassword={inputPassword}
-                passwordError={passwordError}
-                handlePassword={handlePassword}
-                isPasswordValid={isPasswordValid}
-                handleBlur={handleBlur} />
+            isDarkMode={isDarkMode}
+            inputPassword={inputPassword}
+            passwordError={passwordError}
+            handlePassword={handlePassword}
+            isPasswordValid={isPasswordValid}
+            handleBlur={handleBlur} />
           
           <div>
             <button type="button" id="submitPwJoinBtn" className="btn-type1"

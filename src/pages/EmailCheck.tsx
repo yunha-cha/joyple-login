@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import type { EmailValid } from '../types/joypleLogin';
 import EmailForm from '../components/EmailForm';
 
+type EmailCheckProps = {
+  isDarkMode :boolean;
+}
 
-const EmailCheck = () => {
-
-    // 임시 [라이트]/다크 모드
-    const isDarkMode :boolean = false;
+const EmailCheck = ({isDarkMode} :EmailCheckProps) => {
 
     const navigate = useNavigate();
     const [inputEmail, setInputEmail] = useState("");
@@ -107,8 +107,7 @@ const EmailCheck = () => {
                         inputEmail={inputEmail}
                         isEmailValid={isEmailValid}
                         handleEmail={handleEmail}
-                        handleBlur={handleBlur}
-                    />
+                        handleBlur={handleBlur} />
                     {/* 로그인 계속하기 버튼 */}
                     <div>
                         <button type="button" id="submitNextBtn" className="btn-type1"

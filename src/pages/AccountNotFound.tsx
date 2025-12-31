@@ -3,8 +3,6 @@ import type { Game, Lang } from '../types/joypleLogin';
 
 const AccountNotFound = () => {
 
-  // 임시 [라이트]/다크 모드
-  const isDarkMode :boolean = false;
   const userEmail :string | null = localStorage.getItem('userEmail');
   
   /**
