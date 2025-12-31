@@ -32,7 +32,7 @@ const ToggleEye = ({isEye, isDarkMode} :ToogleEyeProps) => {
                 </svg>
             }
 
-            {/* 다크 모드일 때 */}
+            {/* 다크 모드, 비밀번호 모드 */}
             {
                 isDarkMode && !isEye &&
                 <svg width="17" height="12" viewBox="0 0 17 12" fill="none" xmlns="http://www.w3.org/2000/svg">

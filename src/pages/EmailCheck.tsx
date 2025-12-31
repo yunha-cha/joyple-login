@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { EmailValid } from '../types/joypleLogin';
-import { inputCss, setInputColor } from '../utils/inputUtils';
+import EmailForm from '../components/EmailForm';
 
 
 const EmailCheck = () => {
@@ -99,43 +99,16 @@ const EmailCheck = () => {
     return(
         <>     
             <h2 className="subtitle">로그인 또는 회원 가입을 원하는 이메일을 입력해주세요.</h2>
-
             {/* 이메일 입력 */}
             <div className="formStyle">
                 <form name="contact" className="contact-inform form">
-                    <div className="form-wrap">
-                        <div className="form-row">
-                            <div className="form-group">
-                            <input
-                                type="text"
-                                id="email"
-                                className={"form-input reset"}
-                                placeholder="none"
-                                value={inputEmail}
-                                onChange={handleEmail}
-                                onBlur={handleBlur}
-                                style={{
-                                    ...inputCss(isDarkMode),
-                                    borderColor: setInputColor(isEmailValid.isValid)
-                                }}
-                                required
-                            />
-                            <label htmlFor="email" className="form-label"
-                                style={{
-                                    color: setInputColor(isEmailValid.isValid)
-                                }}>
-                                이메일 계정
-                            </label>
-                            </div>
-                            {
-                                isEmailValid?.emailError && (
-                                <div className="error-message" id="email-error">
-                                    {isEmailValid?.emailError}
-                                </div>)
-                            }
-                        </div>
-                    </div>
-
+                    <EmailForm 
+                        isDarkMode={isDarkMode}
+                        inputEmail={inputEmail}
+                        isEmailValid={isEmailValid}
+                        handleEmail={handleEmail}
+                        handleBlur={handleBlur}
+                    />
                     {/* 로그인 계속하기 버튼 */}
                     <div>
                         <button type="button" id="submitNextBtn" className="btn-type1"
