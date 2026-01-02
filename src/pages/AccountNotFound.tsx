@@ -17,7 +17,7 @@ const AccountNotFound = () => {
     //     upperLan = lanParam.toUpperCase();
     // }
 
-    //[s] 테스트 언어 => 언어 연결 시 삭제
+    // 임시 테스트 언어 => 언어 연결 시 삭제
     let upperLan :Lang = 'KO';
 
     const url :string = CONTACT_LINKS[upperLan]?.[game];

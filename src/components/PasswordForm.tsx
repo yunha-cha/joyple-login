@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { inputCss, setInputColor } from "../utils/inputUtils";
 import ToggleEye from "./ToggleEye";
+import { ModeContext } from "../contexts/ModeContext";
 
 type PasswordFormProps = {
-    isDarkMode :boolean;
     inputPassword :string;
     passwordError :string;
     isPasswordValid :boolean | null;
@@ -11,10 +11,10 @@ type PasswordFormProps = {
     handleBlur :() => void;
 }
 
-const PasswordForm = ({isDarkMode, inputPassword, passwordError, isPasswordValid, handlePassword, handleBlur} :PasswordFormProps) => {
-
-  // 비밀번호 눈 표시 모드(password일 때 false)
-  const [isPasswordVisiable, setIsPasswordVisible] = useState<boolean>(false);
+const PasswordForm = ({inputPassword, passwordError, isPasswordValid, handlePassword, handleBlur} :PasswordFormProps) => {
+    const isDarkMode = useContext(ModeContext);
+    // 비밀번호 눈 표시 모드(password일 때 false)
+    const [isPasswordVisiable, setIsPasswordVisible] = useState<boolean>(false);
 
     return (
         <div className="form-wrap">
@@ -27,11 +27,10 @@ const PasswordForm = ({isDarkMode, inputPassword, passwordError, isPasswordValid
                         onChange={handlePassword}
                         onBlur={handleBlur}
                         style={{
-                            ...inputCss,
+                            ...inputCss(isDarkMode),
                             borderColor: setInputColor(isPasswordValid)
                         }}
-                        placeholder=""
-                        required />
+                        placeholder="" />
                     <label htmlFor="password" className="form-label"
                         style={{
                             color: setInputColor(isPasswordValid)
@@ -41,7 +40,7 @@ const PasswordForm = ({isDarkMode, inputPassword, passwordError, isPasswordValid
                         inputPassword &&
                         <button type="button" className="toggle-password"
                         onClick={() => setIsPasswordVisible(!isPasswordVisiable)}>
-                            <ToggleEye isEye={isPasswordVisiable} isDarkMode={isDarkMode} />
+                            <ToggleEye isEye={isPasswordVisiable} />
                         </button>
                     }
                     </div>

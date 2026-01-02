@@ -3,12 +3,17 @@
  * @param param 아이콘 표시
  */
 
+import { useContext } from "react";
+import { ModeContext } from "../contexts/ModeContext";
+
 type ToogleEyeProps = {
     isEye :boolean;
-    isDarkMode :boolean;
 }
 
-const ToggleEye = ({isEye, isDarkMode} :ToogleEyeProps) => {
+const ToggleEye = ({isEye} :ToogleEyeProps) => {
+
+    const isDarkMode = useContext(ModeContext);
+
     return (
         <>
             {/* 라이트 모드, 비밀번호 표시 모드 */}

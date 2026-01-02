@@ -1,16 +1,17 @@
+import { useContext } from "react";
 import type { EmailValid } from "../types/joypleLogin";
 import { inputCss, setInputColor } from "../utils/inputUtils";
+import { ModeContext } from "../contexts/ModeContext";
 
 type EmailFormProps = {
-    isDarkMode :boolean;
     inputEmail :string;
     isEmailValid :EmailValid; // emailError, isValid
     handleEmail :(e :React.ChangeEvent<HTMLInputElement>) => void;
     handleBlur :() => void;
 }
 
-
-const EmailForm = ({isDarkMode, inputEmail, isEmailValid, handleEmail, handleBlur} :EmailFormProps) => {
+const EmailForm = ({inputEmail, isEmailValid, handleEmail, handleBlur} :EmailFormProps) => {
+    const isDarkMode = useContext(ModeContext);
 
     return (
         <>
@@ -29,7 +30,6 @@ const EmailForm = ({isDarkMode, inputEmail, isEmailValid, handleEmail, handleBlu
                             ...inputCss(isDarkMode),
                             borderColor: setInputColor(isEmailValid.isValid)
                         }}
-                        required
                     />
                     <label htmlFor="email" className="form-label"
                         style={{

@@ -2,78 +2,21 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { EmailValid } from '../types/joypleLogin';
 import EmailForm from '../components/EmailForm';
+import useEmailForm from '../hooks/useEmailForm';
 
-type EmailCheckProps = {
-  isDarkMode :boolean;
-}
-
-const EmailCheck = ({isDarkMode} :EmailCheckProps) => {
+const EmailCheck = () => {
 
     const navigate = useNavigate();
-    const [inputEmail, setInputEmail] = useState("");
-    const [isEmailValid, setIsEmailValid] = useState<EmailValid>({
-        emailError: "",
-        isValid: null
-    });
-
-    /**
-     * 입력값 감지에 따른 이메일 상태 값 업데이트, 이메일 유효성 검사
-     * @param e 이메일 입력값
-     */
-    const handleEmail = (e :React.ChangeEvent<HTMLInputElement>) => {
-        const { value } = e.target;
-        setInputEmail(value);
-        chkEmail(value);
-    }
-
-    /**
-     * blur 시 초기 상태로 변경
-     */
-    const handleBlur = () => {
-        if(inputEmail == ""){
-            setIsEmailValid({
-                emailError :"",
-                isValid :null
-            });
-        };
-    }
-
-    /**
-     * 이메일 유효성 검증
-     * @param email 이메일
-     */
-    const chkEmail = (target :string ) => {
-        const email = target.trim();
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        
-        if(!email){
-            console.log("이메일 입력안했을 때");
-            setIsEmailValid({
-                emailError :"이메일을 입력해주세요.",
-                isValid :false
-            });
-        } else if(!emailPattern.test(email)){
-            setIsEmailValid({
-                emailError :"올바른 이메일 형식이 아닙니다.",
-                isValid :false
-            });
-        } else{
-            console.log("검증 성공");
-            setIsEmailValid({
-                emailError :"",
-                isValid :true
-            });
-        }
-    }
+    const {inputEmail, isEmailValid, chkEmail, handleEmail, handleBlur} = useEmailForm();
 
     /**
      * 로그인 다음 단계  
      * :이메일 검증 및 페이지 이동
      */
-    const actNextLogin = () => {
+    const actNextLogin = (e :React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
 
         chkEmail(inputEmail);
-
         if(isEmailValid?.isValid){
             alert(inputEmail);
             //이메일을 브라우저에 저장
@@ -101,17 +44,16 @@ const EmailCheck = ({isDarkMode} :EmailCheckProps) => {
             <h2 className="subtitle">로그인 또는 회원 가입을 원하는 이메일을 입력해주세요.</h2>
             {/* 이메일 입력 */}
             <div className="formStyle">
-                <form name="contact" className="contact-inform form">
+                <form name="contact" className="contact-inform form"
+                    onSubmit={actNextLogin}>
                     <EmailForm 
-                        isDarkMode={isDarkMode}
                         inputEmail={inputEmail}
                         isEmailValid={isEmailValid}
                         handleEmail={handleEmail}
                         handleBlur={handleBlur} />
                     {/* 로그인 계속하기 버튼 */}
                     <div>
-                        <button type="button" id="submitNextBtn" className="btn-type1"
-                            onClick={() => actNextLogin()}
+                        <button type="submit" id="submitNextBtn" className="btn-type1"
                         >로그인</button>
                     </div>
                 </form>
